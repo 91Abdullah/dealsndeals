@@ -4,11 +4,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-dashboard"></i> Dashboard
+            <i class="fa fa-book"></i> Admin
+            <small>Product</small>
+            <a href="" class="btn btn-primary">Create New</a>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ route('admin::index') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
-            <li class="active">Dashboard</li>
+            <li class="active">Product</li>
         </ol>
     </section>
 
@@ -17,5 +19,4 @@
         <!-- Your Page Content Here -->
 
     </section>
-    <!-- /.content -->
 @endsection

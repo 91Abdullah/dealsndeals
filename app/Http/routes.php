@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin::'], function() {
     Route::get('/', ['as' => 'index', 'uses' => 'IndexController@index']);
-    Route::get('product', ['as' => 'products', 'uses' => 'ProductsController@index']);
+    Route::get('product', ['as' => 'product', 'uses' => 'ProductsController@index']);
+    Route::get('product/new', ['as' => 'product.new', 'uses' => 'ProductsController@create']);
+    Route::get('category', ['as' => 'category', 'uses' => 'CategoriesController@index']);
 });
 
