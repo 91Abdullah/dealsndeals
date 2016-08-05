@@ -1,5 +1,9 @@
 @extends('admin.master')
 
+@section('styles')
+    <link href="{{ URL::to('plugins/select2/select2.min.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -18,11 +22,11 @@
     <section class="content">
         <!-- Your Page Content Here -->
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            General
+                            Information
                         </h3>
                     </div>
                     {!! Form::open(['route' => 'admin::product.save', 'class' => 'form-horizontal']) !!}
@@ -42,13 +46,13 @@
                             <div class="form-group">
                                 {!! Form::label('description', 'Description', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+                                    {!! Form::textarea('description', null, ['class' => 'form-control editor']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
                                 {!! Form::label('long_description', 'Long Description', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::textarea('long_description', null, ['class' => 'form-control']) !!}
+                                    {!! Form::textarea('long_description', null, ['class' => 'form-control editor']) !!}
                                 </div>
                             </div>
                             <div class="box-header with-border">
@@ -59,13 +63,13 @@
                             <div class="form-group">
                                 {!! Form::label('meta_title', 'Meta Title', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::text('meta_title', null, ['class' => 'form-control']) !!}
+                                    {!! Form::text('meta_title', null, ['class' => 'form-control', 'maxlength' => '70']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
                                 {!! Form::label('meta_description', 'Meta Description', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::text('meta_description', null, ['class' => 'form-control']) !!}
+                                    {!! Form::textarea('meta_description', null, ['class' => 'form-control','rows' => '2', 'maxlength' => '160']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -91,10 +95,34 @@
                                     {!! Form::text('price', null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    Associations
+                                </h3>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('categories', 'Select Category(s)', ['class' => 'col-sm-2 control-label']) !!}
+                                <div class="col-sm-10">
+                                    {!! Form::select('categories', [1 => 'Category 1', 2 => 'Category 2'], null, ['class' => 'form-control js-example-basic-multiple', 'multiple' => 'multiple']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('default_category', 'Default Category', ['class' => 'col-sm-2 control-label']) !!}
+                                <div class="col-sm-10">
+                                    {!! Form::select('price', [1 => 'Category 1', 2 => 'Category 2'], null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
                         </div>
                     {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script src='{{ URL::to('plugins/tinymce/js/tinymce/tinymce.min.js') }}'></script>
+    <script src='{{ URL::to('dist/js/bootstrap-maxlength.js') }}'></script>
+    <script src="{{ URL::to('plugins/select2/select2.min.js') }}"></script>
+    <script src='{{ URL::to('dist/js/product.js') }}'></script>
 @endsection
