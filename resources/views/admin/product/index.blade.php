@@ -5,9 +5,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <i class="fa fa-book"></i> Admin
-                <small>Product</small>
-                <a href="" class="btn btn-primary">Create New</a>
+                <i class="fa fa-book"></i> Product
+                <small><a href="{{ route('admin::product.new') }}" class="btn btn-primary">Create New</a></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ route('admin::index') }}"><i class="fa fa-dashboard"></i> Admin</a></li>

@@ -16,9 +16,16 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin::'], function() {
+
+
     Route::get('/', ['as' => 'index', 'uses' => 'IndexController@index']);
-    Route::get('product', ['as' => 'product', 'uses' => 'ProductsController@index']);
+
+    //Product routes
+    Route::get('product', ['as' => 'product.index', 'uses' => 'ProductsController@index']);
+    Route::post('product', ['as' => 'product.save', 'uses' => 'ProductsController@save']);
     Route::get('product/new', ['as' => 'product.new', 'uses' => 'ProductsController@create']);
+
+    //Category routes
     Route::get('category', ['as' => 'category', 'uses' => 'CategoriesController@index']);
 });
 

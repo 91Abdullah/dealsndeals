@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('sku');
             $table->string('meta_title');
             $table->string('meta_description');
+            $table->string('friendly_url');
             $table->string('wholesale_price');
             $table->string('price');
             $table->string('description');

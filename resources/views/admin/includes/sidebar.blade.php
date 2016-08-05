@@ -41,7 +41,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::is('admin/product') || Request::is('admin/product/*') ? 'active' : '' }}"><a href="{{ route('admin::product') }}">Products</a></li>
+                    <li class="{{ Request::is('admin/product') || Request::is('admin/product/*') ? 'active' : '' }}"><a href="{{ route('admin::product.index') }}">Products</a></li>
                     <li class="{{ Request::is('admin/category') || Request::is('admin/category/*') ? 'active' : '' }}"><a href="{{ route('admin::category') }}">Categories</a></li>
                 </ul>
             </li>
