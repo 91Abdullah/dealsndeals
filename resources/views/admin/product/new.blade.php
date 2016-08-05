@@ -13,7 +13,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ route('admin::index') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
-            <li class="active">Product</li>
+            <li><a href="{{ route('admin::product.index') }}">Product</a></li>
             <li class="active">Create New</li>
         </ol>
     </section>

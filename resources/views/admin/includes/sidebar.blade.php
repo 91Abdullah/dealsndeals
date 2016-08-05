@@ -33,7 +33,7 @@
             <li class="header">Menu</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="{{ Request::is('admin') ? 'active' : '' }}"><a href="{{ route('admin::index') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li class="treeview {{ Request::is('admin/product') || Request::is('admin/product/*') ? 'active' : '' }}">
+            <li class="treeview {{ Request::is('admin/product') || Request::is('admin/product/*') || Request::is('admin/category') || Request::is('admin/category/*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-book"></i>
                     <span>Catalogue</span>
                     <span class="pull-right-container">
@@ -42,7 +42,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('admin/product') || Request::is('admin/product/*') ? 'active' : '' }}"><a href="{{ route('admin::product.index') }}">Products</a></li>
-                    <li class="{{ Request::is('admin/category') || Request::is('admin/category/*') ? 'active' : '' }}"><a href="{{ route('admin::category') }}">Categories</a></li>
+                    <li class="{{ Request::is('admin/category') || Request::is('admin/category/*') ? 'active' : '' }}"><a href="{{ route('admin::category.index') }}">Categories</a></li>
                 </ul>
             </li>
         </ul>

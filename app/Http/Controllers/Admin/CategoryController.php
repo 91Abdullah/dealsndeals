@@ -8,15 +8,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class ProductsController extends Controller
+class CategoryController extends Controller
 {
+    //
     public function index()
     {
-        return view('admin.product.index');
+        return view('admin.category.index');
     }
 
     public function create()
     {
-        return view('admin.product.new');
+        return view('admin.category.create');
     }
 }

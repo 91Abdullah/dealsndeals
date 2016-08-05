@@ -16,6 +16,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->integer('parent_id');
             $table->boolean('is_root');
+            $table->boolean('active');
             $table->string('name');
             $table->string('meta_title');
             $table->string('meta_description');
