@@ -2,6 +2,7 @@
 
 @section('styles')
     <link href="{{ URL::to('plugins/select2/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::to('plugins/iCheck/square/green.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -24,7 +25,10 @@
             <div class="col-sm-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        {!! Form::open(['route' => 'admin::category.save', 'class' => 'form-horizontal']) !!}
+                        Create a new Category
+                    </div>
+                    {!! Form::open(['route' => 'admin::category.save', 'class' => 'form-horizontal']) !!}
+                        <div class="box-body">
                             <div class="form-group">
                                 {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
@@ -32,21 +36,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                {!! Form::label('active', 'Displayed', ['class' => 'col-sm-2 control-label']) !!}
-                                <div class="col-sm-10">
-                                    {!! Form::text('active', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 {!! Form::label('parent_id', 'Parent', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::select('parent_id', [1 => 'Home', 2 => 'Some long category'], ['class' => 'js-example-responsive form-control', 'multiple' => 'multiple']) !!}
+                                    {!! Form::select('parent_id', $category, null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
-                                {!! Form::label('description', 'Description', ['class' => 'col-sm-2 control-label']) !!}
-                                <div class="col-sm-10">
-                                    {!! Form::textarea('description', null, ['class' => 'editor form-control']) !!}
+                                {!! Form::label('active', 'Displayed', ['class' => 'col-sm-2 control-label']) !!}
+                                <div class="col-sm-10 checkbox" style="padding-left: 35px;">
+                                    {!! Form::checkbox('active', null) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -61,8 +59,17 @@
                                     {!! Form::textarea('meta_description', null, ['class' => 'form-control','rows' => '2', 'maxlength' => '160']) !!}
                                 </div>
                             </div>
-                        {!! Form::close() !!}
-                    </div>
+                            <div class="form-group">
+                                {!! Form::label('description', 'Description', ['class' => 'col-sm-2 control-label']) !!}
+                                <div class="col-sm-10">
+                                    {!! Form::textarea('description', null, ['class' => 'editor form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            {!! Form::submit('Save', ['class' => 'btn btn-info pull-right']) !!}
+                        </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
@@ -73,5 +80,6 @@
     <script src='{{ URL::to('plugins/tinymce/js/tinymce/tinymce.min.js') }}'></script>
     <script src='{{ URL::to('dist/js/bootstrap-maxlength.js') }}'></script>
     <script src="{{ URL::to('plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ URL::to('plugins/iCheck/icheck.min.js') }}"></script>
     <script src='{{ URL::to('dist/js/category.js') }}'></script>
 @endsection

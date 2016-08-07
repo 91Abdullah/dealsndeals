@@ -32,6 +32,5 @@ $(document).ready(function() {
 
     $("#meta_title").maxlength();
     $("#meta_description").maxlength();
-    $("#parent_id").select2();
 
 } );

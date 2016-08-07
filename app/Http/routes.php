@@ -29,5 +29,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], f
     Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
     Route::post('category', ['as' => 'category.save', 'uses' => 'CategoryController@save']);
     Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
+    Route::get('category/edit/{id}', ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);
+    Route::patch('category/update/{id}', ['as' => 'category.update', 'uses' => 'CategoryController@update']);
 });
 
