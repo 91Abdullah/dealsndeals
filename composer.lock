@@ -2176,59 +2176,6 @@
     ],
     "packages-dev": [
         {
-            "name": "atayahmet/laravel-nestable",
-            "version": "v0.6.31",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/atayahmet/laravel-nestable.git",
-                "reference": "48c3cc35a5d5d3dc1782e86a434e8db48b6a83ce"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/atayahmet/laravel-nestable/zipball/48c3cc35a5d5d3dc1782e86a434e8db48b6a83ce",
-                "reference": "48c3cc35a5d5d3dc1782e86a434e8db48b6a83ce",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "5.2.*",
-                "illuminate/support": "5.2.*",
-                "php": ">=5.5.5"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.0",
-                "phpunit/phpunit": "^4.0|^5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Nestable\\": "src/",
-                    "Nestable\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ahmet ATAY",
-                    "email": "ahmet.atay@hotmail.com",
-                    "homepage": "http://www.atayahmet.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel 5 nested categories library",
-            "homepage": "https://github.com/atayahmet/nestable",
-            "keywords": [
-                "category",
-                "laravel",
-                "nestable",
-                "nested",
-                "nestedset"
-            ],
-            "time": "2016-07-22 19:58:40"
-        },
-        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {

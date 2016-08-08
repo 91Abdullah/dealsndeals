@@ -38,7 +38,7 @@
                         <div class="form-group">
                             {!! Form::label('parent_id', 'Parent', ['class' => 'col-sm-2 control-label']) !!}
                             <div class="col-sm-10">
-                                {!! Form::select('parent_id', $category->getAncestors()->pluck('name', 'id'), null, ['class' => 'form-control']) !!}
+                                {!! Form::select('parent_id', $parent, null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">

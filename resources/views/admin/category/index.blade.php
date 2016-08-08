@@ -15,8 +15,9 @@
 
     <!-- Main content -->
     <section class="content">
-        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
+        @if(!empty($categories))
+            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
@@ -24,8 +25,8 @@
                     <th>Displayed</th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach($categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
@@ -34,13 +35,13 @@
                         <td><a href="#"><i style="color: {{ $category->active ? 'green' : 'red' }}" class="fa {{ $category->active ? 'fa-check' : 'fa-times' }}"></i></a></td>
                         <td>
                             <div class="btn-group">
-                                <a type="button" href="{{ route('admin::category.edit', $category->id) }}" class="btn btn-default"><span class="fa fa-pencil"></span> Edit</a>
+                                <a type="button" href="{{ route('admin::category.view', $category->id) }}" class="btn btn-default"><span class="fa fa-search"></span> View</a>
                                 <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"><i class="fa fa-eye"></i> Preview</a></li>
+                                    <li><a href="{{ route('admin::category.edit', $category->id) }}"><i class="fa fa-pencil"></i> Edit</a></li>
                                     <li><a href="#"><i class="fa fa-copy"></i>Duplicate</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#"><i class="fa fa-trash"></i> Delete</a></li>
@@ -49,7 +50,10 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        @else
+            <div class="alert alert-info">No categories found.</div>
+        @endif
     </section>
 @endsection
