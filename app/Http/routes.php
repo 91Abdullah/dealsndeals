@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin::'], function() {
+Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], function() {
 
 
     Route::get('/', ['as' => 'index', 'uses' => 'IndexController@index']);
@@ -26,6 +26,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::'], function() {
     Route::get('product/new', ['as' => 'product.new', 'uses' => 'ProductsController@create']);
 
     //Category routes
-    Route::get('category', ['as' => 'category', 'uses' => 'CategoriesController@index']);
+    Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
+    Route::post('category', ['as' => 'category.save', 'uses' => 'CategoryController@save']);
+    Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
+    Route::get('category/edit/{id}', ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);
+    Route::patch('category/update/{id}', ['as' => 'category.update', 'uses' => 'CategoryController@update']);
 });
 

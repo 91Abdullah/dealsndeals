@@ -13,7 +13,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ route('admin::index') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
-            <li class="active">Product</li>
+            <li><a href="{{ route('admin::product.index') }}">Product</a></li>
             <li class="active">Create New</li>
         </ol>
     </section>
@@ -73,9 +73,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                {!! Form::label('friendly_url', 'Friendly Url', ['class' => 'col-sm-2 control-label']) !!}
+                                {!! Form::label('slug', 'Friendly Url', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::text('friendly_url', null, ['class' => 'form-control']) !!}
+                                    {!! Form::text('slug', null, ['class' => 'form-control']) !!}
+                                    <span class="help-block">Leave blank if you want to auto-generate</span>
                                 </div>
                             </div>
                             <div class="box-header with-border">
