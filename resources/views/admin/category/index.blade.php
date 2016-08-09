@@ -9,19 +9,20 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ route('admin::index') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
-            <li class="active">Category</li>
+            <li><a href="{{ route('admin::category.index') }}">Category</a></li>
+            <li class="active">{{ $breadcrumb }}</li>
         </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-        @if(!empty($categories))
+        @include('admin.includes.errors')
+        @if(count($categories) >= 1)
             <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Displayed</th>
                     <th></th>
                 </tr>
@@ -31,7 +32,6 @@
                     <tr>
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
-                        <td>{{ $category->description }}</td>
                         <td><a href="#"><i style="color: {{ $category->active ? 'green' : 'red' }}" class="fa {{ $category->active ? 'fa-check' : 'fa-times' }}"></i></a></td>
                         <td>
                             <div class="btn-group">
@@ -44,7 +44,7 @@
                                     <li><a href="{{ route('admin::category.edit', $category->id) }}"><i class="fa fa-pencil"></i> Edit</a></li>
                                     <li><a href="#"><i class="fa fa-copy"></i>Duplicate</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-trash"></i> Delete</a></li>
+                                    <li><a href="{{ route('admin::category.delete', $category->id) }}"><i class="fa fa-trash"></i> Delete</a></li>
                                 </ul>
                             </div>
                         </td>

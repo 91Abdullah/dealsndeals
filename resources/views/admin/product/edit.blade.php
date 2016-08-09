@@ -2,19 +2,19 @@
 
 @section('styles')
     <link href="{{ URL::to('plugins/select2/select2.min.css') }}" rel="stylesheet" />
-@endsection
+    @endsection
 
-@section('content')
-    <!-- Content Header (Page header) -->
+    @section('content')
+            <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
             <i class="fa fa-book"></i> Product
-            <small>Create New</small>
+            <small>Edit</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ route('admin::index') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
             <li><a href="{{ route('admin::product.index') }}">Product</a></li>
-            <li class="active">Create New</li>
+            <li class="active">Edit</li>
         </ol>
     </section>
 
@@ -29,7 +29,7 @@
                             Information
                         </h3>
                     </div>
-                    {!! Form::open(['route' => 'admin::product.save', 'class' => 'form-horizontal']) !!}
+                    {!! Form::model($product, ['method' => 'PATCH', 'route' => ['admin::category.update', $product->id], 'class' => 'form-horizontal']) !!}
                         <div class="box-body">
                             <div class="form-group">
                                 {!! Form::label('name', 'Product Name', ['class' => 'col-sm-2 control-label']) !!}
@@ -103,13 +103,13 @@
                             <div class="form-group">
                                 {!! Form::label('categories', 'Select Category(s)', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::select('categories[]', $categories, null, ['class' => 'form-control js-example-basic-multiple', 'multiple' => 'multiple']) !!}
+                                    {!! Form::select('categories[]', $categories, $product->categories(), ['class' => 'form-control js-example-basic-multiple js-states', 'multiple' => 'multiple']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
                                 {!! Form::label('category_id', 'Default Category', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
+                                    {!! Form::select('category_id', $categories, $product->default_category()->get(),['class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <div class="box-header with-border">
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
+                            {!! Form::submit('Save', ['class' => 'btn btn-info pull-right']) !!}
                         </div>
                     {!! Form::close() !!}
                 </div>

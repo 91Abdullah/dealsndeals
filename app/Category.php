@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 
-use Kalnoy\Nestedset\NodeTrait;
+use Baum;
 
-class Category extends Model
+class Category extends Baum\Node
 {
     //
-    use NodeTrait;
     use Sluggable;
 
     protected $fillable = ['description', 'meta_title', 'meta_description', 'name', 'active'];
@@ -19,7 +18,7 @@ class Category extends Model
 
     public function products()
     {
-        $this->belongsToMany('App\Product');
+        return $this->belongsToMany('App\Product');
     }
 
     public function sluggable()

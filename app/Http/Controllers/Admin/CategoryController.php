@@ -16,32 +16,28 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $category = Category::where('id', '!=', 1)->get();
-        return view('admin.category.index', ['categories' => $category]);
+        $categories = Category::root()->children()->get();
+        $breadcrumb = Category::root()->getRoot()->name;
+        return view('admin.category.index', compact('categories', 'breadcrumb'));
     }
 
     public function view($id)
     {
-        $category = Category::descendantsOf($id)->toTree();
-        return view('admin.category.index', ['categories' => $category]);
+        $categories = Category::findOrFail($id)->children()->get();
+        $breadcrumb = Category::findOrFail($id)->name;
+        return view('admin.category.index', compact('categories', 'breadcrumb'));
     }
 
     public function create()
     {
-        $category = Category::get()->toTree()->pluck('name', 'id');
+        $category = Category::all()->pluck('name', 'id');
         return view('admin.category.create', compact('category'));
     }
 
     public function save(Request $request)
     {
-        if (!isEmptyOrNullString($request['parent'])) {
-            $parent = Category::findOrFail($request['parent_id']);
-            $category = Category::create($request->all(), $parent);
-        }
-        else
-        {
-            $category = Category::create($request->all());
-        }
+        $root = Category::findOrFail($request->parent_id)->children()->create($request->all());
+        \Session::flash('success', 'Category created successfully');
         return redirect()->route('admin::category.index');
     }
 
@@ -52,14 +48,26 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        $parent = Category::all()->pluck('name', 'id');
-        return view('admin.category.edit', compact('category', 'parent'));
+        $parent = Category::where('id', '!=', $category->id)->pluck('name', 'id');
+        return view('admin.category.edit', compact('parent', 'category'));
     }
 
     public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
+        if ($request->parent_id != $category->parent_id)
+            $category->parent_id = $request->parent_id;
         $category->update($request->all());
+        \Session::flash('success', 'Category updated successfully');
+        return redirect()->route('admin::category.index');
+
+    }
+
+    public function delete($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+        \Session::flash('success', 'Category deleted successfully');
         return redirect()->route('admin::category.index');
     }
 }

@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->integer('category_id');
             $table->text('long_description');
+            $table->boolean('active');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], f
     Route::get('product', ['as' => 'product.index', 'uses' => 'ProductsController@index']);
     Route::post('product', ['as' => 'product.save', 'uses' => 'ProductsController@save']);
     Route::get('product/new', ['as' => 'product.new', 'uses' => 'ProductsController@create']);
+    Route::get('product/edit/{id}', ['as' => 'product.edit', 'uses' => 'ProductsController@edit']);
 
     //Category routes
     Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
@@ -32,5 +33,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], f
     Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
     Route::get('category/edit/{id}', ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);
     Route::patch('category/update/{id}', ['as' => 'category.update', 'uses' => 'CategoryController@update']);
+    Route::get('category/delete/{id}', ['as' => 'category.delete', 'uses' => 'CategoryController@delete']);
 });
 

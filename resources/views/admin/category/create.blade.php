@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 {!! Form::label('active', 'Displayed', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10 checkbox" style="padding-left: 35px;">
-                                    {!! Form::checkbox('active', null) !!}
+                                    {!! Form::checkbox('active') !!}
                                 </div>
                             </div>
                             <div class="form-group">

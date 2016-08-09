@@ -10,8 +10,8 @@ class Product extends Model
 {
     use Sluggable;
     //
-    protected $fillable = ['name', 'sku', 'meta_title', 'meta_description', 'slug',
-        'wholesale_price', 'price', 'description', 'category_id', 'long_description'];
+    protected $fillable = ['name', 'sku', 'meta_title', 'meta_description',
+        'wholesale_price', 'price', 'description', 'category_id', 'long_description', 'active', 'quantity'];
 
     public function sluggable()
     {
@@ -24,16 +24,16 @@ class Product extends Model
 
     public function images()
     {
-        $this->hasMany('App\Image');
+        return $this->hasMany('App\Image');
     }
 
     public function default_category()
     {
-        $this->hasOne('App\Category');
+        return $this->belongsTo('App\Category', 'category_id');
     }
 
     public function categories()
     {
-        $this->belongsToMany('App\Category');
+        return $this->belongsToMany('App\Category', 'category_product', 'category_id', 'product_id');
     }
 }

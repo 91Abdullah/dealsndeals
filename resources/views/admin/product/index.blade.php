@@ -32,47 +32,35 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>SKU</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Wholesale Price</th>
-                        <th>Quantity</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </tfoot>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><img class="img-responsive" src="http://placehold.it/70x55" alt=""></td>
-                        <td>Tree of Life</td>
-                        <td>0001</td>
-                        <td>Home Decor</td>
-                        <td>2499</td>
-                        <td>1000</td>
-                        <td>100</td>
-                        <td><a href="#"><i class="fa fa-check"></i></a></td>
-                        <td>
-                            <div class="btn-group">
-                                <a type="button" href="#" class="btn btn-default"><span class="fa fa-pencil"></span> Edit</a>
-                                <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"><i class="fa fa-eye"></i> Preview</a></li>
-                                    <li><a href="#"><i class="fa fa-copy"></i>Duplicate</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-trash"></i> Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                    @foreach($products as $product)
+                        <tr>
+                            <td>{{ $product->id }}</td>
+                            <td><img class="img-responsive" src="http://placehold.it/70x55" alt=""></td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->sku }}</td>
+                            <td>{{ $product->default_category->name }}</td>
+                            <td>{{ $product->wholesale_price }}</td>
+                            <td>{{ $product->price }}</td>
+                            <td>{{ $product->quantity }}</td>
+                            <td><a href="#"><i style="color: {{ $product->active ? 'green' : 'red' }}" class="fa {{ $product->active ? 'fa-check' : 'fa-times' }}"></i></a></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a type="button" href="{{ route('admin::product.edit', $product->id) }}" class="btn btn-default"><span class="fa fa-pencil"></span> Edit</a>
+                                    <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#"><i class="fa fa-eye"></i> Preview</a></li>
+                                        <li><a href="#"><i class="fa fa-copy"></i>Duplicate</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"><i class="fa fa-trash"></i> Delete</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </section>

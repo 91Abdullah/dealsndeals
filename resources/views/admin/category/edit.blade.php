@@ -3,10 +3,10 @@
 @section('styles')
     <link href="{{ URL::to('plugins/select2/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::to('plugins/iCheck/square/green.css') }}" rel="stylesheet">
-    @endsection
+@endsection
 
-    @section('content')
-            <!-- Content Header (Page header) -->
+@section('content')
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
             <i class="fa fa-book"></i> Category
@@ -25,7 +25,7 @@
             <div class="col-sm-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        Create a new Category
+                        Edit a Category
                     </div>
                     {!! Form::model($category, ['method' => 'patch', 'route' => ['admin::category.update', $category->id], 'class' => 'form-horizontal']) !!}
                     <div class="box-body">
@@ -44,7 +44,7 @@
                         <div class="form-group">
                             {!! Form::label('active', 'Displayed', ['class' => 'col-sm-2 control-label']) !!}
                             <div class="col-sm-10 checkbox" style="padding-left: 35px;">
-                                {!! Form::checkbox('active', $category->active, $category->active) !!}
+                                {!! Form::checkbox('active') !!}
                             </div>
                         </div>
                         <div class="form-group">
