@@ -2,10 +2,11 @@
 
 @section('styles')
     <link href="{{ URL::to('plugins/select2/select2.min.css') }}" rel="stylesheet" />
-    @endsection
+    <link href="{{ URL::to('dist/css/product.css') }}" rel="stylesheet" />
+@endsection
 
-    @section('content')
-            <!-- Content Header (Page header) -->
+@section('content')
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
             <i class="fa fa-book"></i> Product
@@ -29,7 +30,7 @@
                             Information
                         </h3>
                     </div>
-                    {!! Form::model($product, ['method' => 'PATCH', 'route' => ['admin::category.update', $product->id], 'class' => 'form-horizontal']) !!}
+                    {!! Form::model($product, ['method' => 'PATCH', 'route' => ['admin::product.update', $product->id], 'class' => 'form-horizontal']) !!}
                         <div class="box-body">
                             <div class="form-group">
                                 {!! Form::label('name', 'Product Name', ['class' => 'col-sm-2 control-label']) !!}
@@ -103,7 +104,7 @@
                             <div class="form-group">
                                 {!! Form::label('categories', 'Select Category(s)', ['class' => 'col-sm-2 control-label']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::select('categories[]', $categories, $product->categories(), ['class' => 'form-control js-example-basic-multiple js-states', 'multiple' => 'multiple']) !!}
+                                    {!! Form::select('categories[]', $categories, $selected, ['class' => 'form-control js-example-basic-multiple js-states', 'multiple' => 'multiple', 'width'=>'75%']) !!}
                                 </div>
                             </div>
                             <div class="form-group">

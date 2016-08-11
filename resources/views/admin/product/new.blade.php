@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
+                            {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right', 'multiple' => 'multiple']) !!}
                         </div>
                     {!! Form::close() !!}
                 </div>

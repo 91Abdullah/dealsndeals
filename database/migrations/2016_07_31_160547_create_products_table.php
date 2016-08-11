@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('wholesale_price');
             $table->string('price');
             $table->string('description');
-            $table->integer('category_id');
+            $table->integer('category_id')->unsigned()->index();
             $table->text('long_description');
             $table->boolean('active');
             $table->integer('quantity');

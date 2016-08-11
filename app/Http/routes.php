@@ -25,6 +25,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], f
     Route::post('product', ['as' => 'product.save', 'uses' => 'ProductsController@save']);
     Route::get('product/new', ['as' => 'product.new', 'uses' => 'ProductsController@create']);
     Route::get('product/edit/{id}', ['as' => 'product.edit', 'uses' => 'ProductsController@edit']);
+    Route::patch('product/update/{id}', ['as' => 'product.update', 'uses' => 'ProductsController@update']);
+    Route::get('product/delete/{id}', ['as' => 'product.delete', 'uses' => 'ProductsController@delete']);
+
+    //image uploading routes
+    Route::post('product/upload', ['as' => 'product.upload', 'uses' => 'ProductsController@upload']);
+    Route::get('product/images/{id}', ['as' => 'product.image', 'uses' => 'ProductsController@image']);
+    Route::get('product/images/success/{id}', ['as' => 'image.success', 'uses' => 'ProductsController@success']);
 
     //Category routes
     Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);

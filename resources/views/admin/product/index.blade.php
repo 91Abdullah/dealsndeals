@@ -16,6 +16,7 @@
 
         <!-- Main content -->
         <section class="content">
+            @include('admin.includes.errors')
             <!-- Your Page Content Here -->
             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
@@ -52,10 +53,10 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-eye"></i> Preview</a></li>
                                         <li><a href="#"><i class="fa fa-copy"></i>Duplicate</a></li>
+                                        <li><a href="{{ route('admin::product.image', $product->id) }}"><i class="fa fa-thumbnail"></i>Upload Images</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="#"><i class="fa fa-trash"></i> Delete</a></li>
+                                        <li><a href="{{ route('admin::product.delete', $product->id) }}"><i class="fa fa-trash"></i> Delete</a></li>
                                     </ul>
                                 </div>
                             </td>

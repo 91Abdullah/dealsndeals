@@ -1,0 +1,4 @@
+/* fix .input-group width issue */
+.select2-container {
+    width: auto !important;
+}
