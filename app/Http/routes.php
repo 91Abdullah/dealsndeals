@@ -31,7 +31,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], f
     //image uploading routes
     Route::post('product/upload', ['as' => 'product.upload', 'uses' => 'ProductsController@upload']);
     Route::get('product/images/{id}', ['as' => 'product.image', 'uses' => 'ProductsController@image']);
-    Route::get('product/images/success/{id}', ['as' => 'image.success', 'uses' => 'ProductsController@success']);
 
     //Category routes
     Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);

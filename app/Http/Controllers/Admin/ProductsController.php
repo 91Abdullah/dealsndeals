@@ -67,33 +67,11 @@ class ProductsController extends Controller
 
     public function upload(Request $request)
     {
-        /*$product = Product::findOrFail($request->id);
-        $file = $request->file('file');
-        $destinationPath = 'uploads';
-        $dir = Storage::makeDirectory('uploads/'.$product->name);
-        // If the uploads fail due to file system, you can try doing public_path().'/uploads'
-        //$filename = str_random(12);
-        $filename = $file->getClientOriginalName();
-        //$extension =$file->getClientOriginalExtension();
-        $upload_success = $request->file('file')->move($destinationPath, $dir.DIRECTORY_SEPARATOR.$filename);*/
-
-        $upload_success = true;
-
-        if( $upload_success ) {
-            return response()->json($request->file('file'));
-            //return response()->json(['success', '200']);
-        } else {
-            return response()->json(['error', 400]);
-        }
+        return response()->json('Success', '200');
     }
 
     public function image($id)
     {
         return view('admin.product.images', compact('id'));
-    }
-
-    public function success($id)
-    {
-
     }
 }
