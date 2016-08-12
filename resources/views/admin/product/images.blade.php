@@ -45,10 +45,10 @@
                                 </span>
                             </div>
                         </div>
-                        <button class="btn btn-success"><i class="fa fa-check"></i> Upload files</button>
+                        <button class="btn btn-success" id="start" type="button" style="display: none;"><i class="fa fa-check"></i> Upload files</button>
                     </div>
                 </div>
-                <table class="table table-striped" id="previews">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -166,12 +166,13 @@
             clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
         });
 
-        /*myDropzone.on("addedfile", function(file) {
+        myDropzone.on("addedfile", function(file) {
             // Hookup the start button
-            file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
+            $('#start').show();
+            $("#start").onclick = function() { myDropzone.enqueueFile(file); };
         });
 
-        // Update the total progress bar
+        /* Update the total progress bar
         myDropzone.on("totaluploadprogress", function(progress) {
             document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
         });
