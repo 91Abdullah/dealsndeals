@@ -8,6 +8,8 @@ use App\Product;
 
 use App\Category;
 
+use App\Image;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -67,7 +69,26 @@ class ProductsController extends Controller
 
     public function upload(Request $request)
     {
-        return response()->json('Success', '200');
+        $product = Product::findOrFail($request->id);
+        $file = $request->file('file');
+        $destinationPath = "uploads/" . $product->name;
+        $upload_success = false;
+        $image = new Image();
+        $extension = $file->getClientOriginalExtension();
+        $index = count($product->images);
+        $filename = $product->name . "-" . $index . "." . $extension;
+        $image->name = $filename;
+        ($index == "0" ? $image->is_cover = true : $image->is_cover = false);
+        $upload_success = $file->move($destinationPath, $filename);
+        if ($upload_success) {
+            $image->name = $filename;
+            $product->images()->save($image);
+        }
+        if ($upload_success) {
+            return response()->json(['code'=>200, 'image'=>$product->images]);
+        } else {
+            return response()->json(['code'=>400]);
+        }
     }
 
     public function image($id)

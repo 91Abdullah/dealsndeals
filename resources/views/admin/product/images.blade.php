@@ -36,16 +36,24 @@
                             </button>
                         </div>
                     </div>
-                    <div class="well" style="display: block;">
+                    <div class="well" style="display: none;">
                         <div id="previews">
                             <div style="margin-bottom: 10px;" id="template">
-                                <img data-dz-thumbnail style="margin-right: 5px;" /><span data-dz-name style="margin-right: 5px;"></span>(<span data-dz-size></span>)<span data-dz-errormessage></span>
-                                <span class="pull-right">
+                                <img class="dz-thumbnail" data-dz-thumbnail style="margin-right: 5px;" /> <span data-dz-name style="margin-right: 5px;"></span>(<span data-dz-size></span>)<span data-dz-errormessage></span>
+                                <span class="remove pull-right">
                                     <button class="btn btn-danger" type="button"><i class="fa fa-trash-o"></i> Remove</button>
                                 </span>
                             </div>
                         </div>
-                        <button class="btn btn-success" id="start" type="button" style="display: none;"><i class="fa fa-check"></i> Upload files</button>
+                        <div id="total-progress" class="progress progress-sm active">
+                            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                            </div>
+                        </div>
+                        <button class="btn btn-success" id="start" type="button"><i class="fa fa-check"></i> Upload files</button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible" id="file-success" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-check"></i> <span>Upload successful</span></h4>
                     </div>
                 </div>
                 <table class="table table-striped">
@@ -54,6 +62,9 @@
                             <th>Image</th>
                             <th>Position</th>
                             <th>Cover</th>
+                        </tr>
+                        <tr class="tb-data">
+
                         </tr>
                     </thead>
                 </table>
@@ -155,8 +166,10 @@
         var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
             url: "{{ route('admin::product.upload') }}", // Set the url
             params: {
-                _token : token
+                _token : token,
+                id: "{{ $id }}"
             },
+            paramName: "file",
             thumbnailWidth: 80,
             thumbnailHeight: 80,
             parallelUploads: 20,
@@ -168,26 +181,51 @@
 
         myDropzone.on("addedfile", function(file) {
             // Hookup the start button
-            $('#start').show();
-            $("#start").onclick = function() { myDropzone.enqueueFile(file); };
+            $('#previews').parent().show();
+            $("#start").on('click', function() {
+                myDropzone.enqueueFile(file);
+            });
+            file.previewTemplate.addEventListener("click", function() {
+               myDropzone.removeFile(file);
+            });
         });
 
-        /* Update the total progress bar
+        //Update the total progress bar
         myDropzone.on("totaluploadprogress", function(progress) {
             document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
         });
 
-        myDropzone.on("sending", function(file) {
-            // Show the total progress bar when upload starts
-            document.querySelector("#total-progress").style.opacity = "1";
-            // And disable the start button
-            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
-        });
-
         // Hide the total progress bar when nothing's uploading anymore
         myDropzone.on("queuecomplete", function(progress) {
-            document.querySelector("#total-progress").style.opacity = "0";
+            document.querySelector("#total-progress").style.width = "0%";
         });
+
+        myDropzone.on("success", function(file, response) {
+            $('#previews').parent().hide();
+            $("#file-success").show();
+            setInterval(function () {
+                $("#file-success").hide();
+            }, 3000);
+            //console.log(response);
+            if (response.code == "200") {
+                $.each(response.data, function (index, value) {
+                    console.log(value);
+                    $(".tb-data").append("<td>" + value + "</td>");
+                });
+            }
+        });
+
+        myDropzone.on("complete", function(file) {
+            myDropzone.removeAllFiles();
+        });
+
+
+        /*myDropzone.on("sending", function(file) {
+         // Show the total progress bar when upload starts
+         document.querySelector("#total-progress").style.opacity = "1";
+         // And disable the start button
+         file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+         });
 
         // Setup the buttons for all transfers
         // The "add files" button doesn't need to be setup because the config
