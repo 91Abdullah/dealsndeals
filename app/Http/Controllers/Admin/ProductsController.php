@@ -17,6 +17,7 @@ use App\Http\Requests;
 use Illuminate\Http\Response;
 
 use Storage;
+use TarunMangukiya\ImageResizer\Facades\ImageResizer;
 
 class ProductsController extends Controller
 {
@@ -71,28 +72,22 @@ class ProductsController extends Controller
     {
         $product = Product::findOrFail($request->id);
         $file = $request->file('file');
-        $destinationPath = "uploads/" . $product->name;
-        $upload_success = false;
         $image = new Image();
-        $extension = $file->getClientOriginalExtension();
-        $index = count($product->images);
-        $filename = $product->name . "-" . $index . "." . $extension;
-        $image->name = $filename;
-        ($index == "0" ? $image->is_cover = true : $image->is_cover = false);
-        $upload_success = $file->move($destinationPath, $filename);
-        if ($upload_success) {
-            $image->name = $filename;
-            $product->images()->save($image);
-        }
-        if ($upload_success) {
-            return response()->json(['code'=>200, 'image'=>$product->images]);
-        } else {
-            return response()->json(['code'=>400]);
-        }
+        $image->product_image = $file;
+        $image->save();
+        $or = $product->images()->save($image);
+        return response()->json([
+            'code' => 200,
+            'data' => $product->images,
+            'or' => $or
+        ]);
     }
 
     public function image($id)
     {
-        return view('admin.product.images', compact('id'));
+        $product = Product::findOrFail($id);
+        $images  = $product->images;
+        //return view('admin.product.images', compact('images', 'id'));
+        //return $images;
     }
 }

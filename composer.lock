@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ab9ec592bf914c4ca1a560039c6c811a",
-    "content-hash": "0907273b6fbf11ebf9894ce5245dcec2",
+    "hash": "5c905b4d891ba29ad3b63eee100ab9b1",
+    "content-hash": "891c4f9bc2caaee0a26eb603f5c1d8be",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -445,6 +445,58 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "imagine/imagine",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "f64ec666baaa800edcbf237db41121a569230709"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/f64ec666baaa800edcbf237db41121a569230709",
+                "reference": "f64ec666baaa800edcbf237db41121a569230709",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2013-07-10 17:25:36"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -1235,6 +1287,51 @@
                 "shell"
             ],
             "time": "2016-03-09 05:03:14"
+        },
+        {
+            "name": "sahusoftcom/eloquent-image-mutator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sahusoftcom/eloquent-image-mutator.git",
+                "reference": "3b497f84b83344a388dcccc965dba6bed9ebc06b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sahusoftcom/eloquent-image-mutator/zipball/3b497f84b83344a388dcccc965dba6bed9ebc06b",
+                "reference": "3b497f84b83344a388dcccc965dba6bed9ebc06b",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "v0.5.0",
+                "laravel/framework": "^5.1",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SahusoftCom\\EloquentImageMutator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Sahu Soft India Private Limited"
+            ],
+            "authors": [
+                {
+                    "name": "Mrigank",
+                    "email": "mridul@sahusoft.com"
+                }
+            ],
+            "description": "One solution for image uploads.",
+            "homepage": "https://github.com/sahusoftcom/eloquent-image-mutator",
+            "keywords": [
+                "image",
+                "laravel",
+                "photo",
+                "upload"
+            ],
+            "time": "2016-03-14 18:00:49"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3550,7 +3647,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "sahusoftcom/eloquent-image-mutator": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

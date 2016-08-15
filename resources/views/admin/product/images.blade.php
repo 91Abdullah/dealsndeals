@@ -63,10 +63,18 @@
                             <th>Position</th>
                             <th>Cover</th>
                         </tr>
-                        <tr class="tb-data">
-
-                        </tr>
                     </thead>
+                    <tbody class="tb-data">
+                        @if($images)
+                            @foreach($images as $image)
+                                <tr>
+                                    <td>
+                                        {{ $image->product_image }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -203,14 +211,17 @@
         myDropzone.on("success", function(file, response) {
             $('#previews').parent().hide();
             $("#file-success").show();
-            setInterval(function () {
+            /*setInterval(function () {
                 $("#file-success").hide();
-            }, 3000);
-            //console.log(response);
-            if (response.code == "200") {
+            }, 3000);*/
+            console.log(response.code == 200);
+            if (response.code == 200) {
+                console.log(response);
                 $.each(response.data, function (index, value) {
                     console.log(value);
-                    $(".tb-data").append("<td>" + value + "</td>");
+                    $(".tb-data").append(
+                            "<tr><td><img src='" + value.name + "' alt=''></td><td>" + 0 + "</td><td>" + value.is_cover + "</td></tr>"
+                    );
                 });
             }
         });

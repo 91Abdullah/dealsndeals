@@ -3,14 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use SahusoftCom\EloquentImageMutator\EloquentImageMutatorTrait;
 
 class Image extends Model
 {
-    //
-    protected $fillable = ['name', 'is_cover'];
+    use EloquentImageMutatorTrait;
+    protected $image_fields = ['product_image'];
 
     public function product()
     {
-        $this->belongsTo('App\Product');
+        return $this->belongsTo('App\Product');
     }
 }
