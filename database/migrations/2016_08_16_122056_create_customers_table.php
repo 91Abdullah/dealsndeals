@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImagesTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,14 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id');
-            $table->boolean('is_cover');
-            $table->text('product_image');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('password');
+            $table->boolean('active');
+            $table->boolean('newsletter');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('images');
+        Schema::drop('customers');
     }
 }

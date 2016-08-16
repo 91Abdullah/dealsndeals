@@ -8,6 +8,7 @@ use SahusoftCom\EloquentImageMutator\EloquentImageMutatorTrait;
 class Image extends Model
 {
     use EloquentImageMutatorTrait;
+
     protected $image_fields = ['product_image'];
 
     public function product()

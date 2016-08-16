@@ -37,7 +37,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td>{{ $product->id }}</td>
-                            <td><img class="img-responsive" src="http://placehold.it/70x55" alt=""></td>
+                            <td><img class="img-responsive" src="{{ $product->images->where('is_cover', 1)->first() ? URL::asset($product->images->where('is_cover', 1)->first()->product_image->thumbnail->url) : '' }}" alt=""></td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->sku }}</td>
                             <td>{{ $product->default_category->name }}</td>

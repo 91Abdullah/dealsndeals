@@ -45,6 +45,18 @@
                     <li class="{{ Request::is('admin/category') || Request::is('admin/category/*') ? 'active' : '' }}"><a href="{{ route('admin::category.index') }}">Categories</a></li>
                 </ul>
             </li>
+            <li class="treeview {{ Request::is('admin/customer') ? 'active' : '' }}">
+                <a href="{{ route('admin::customer.index') }}"><i class="fa fa-users"></i>
+                    <span>Customer</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ Request::is('admin/customer') || Request::is('admin/customer/*') ? 'active' : '' }}">Customers</li>
+                    <li class="{{ Request::is('admin/addresses') || Request::is('admin/addresses/*') ? 'active' : '' }}">Addresses</li>
+                </ul>
+            </li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

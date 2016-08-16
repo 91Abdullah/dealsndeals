@@ -14,16 +14,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use Illuminate\Http\Response;
-
-use Storage;
-use TarunMangukiya\ImageResizer\Facades\ImageResizer;
-
 class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('images')->get();
+        //return Product::with('images')->first()->images->first()->product_image->thumbnail->url;
         return view('admin.product.index', compact('products'));
     }
 
@@ -66,28 +62,5 @@ class ProductsController extends Controller
         $product->categories()->sync($request->categories);
         \Session::flash('success', 'Category created successfully');
         return redirect()->route('admin::product.index');
-    }
-
-    public function upload(Request $request)
-    {
-        $product = Product::findOrFail($request->id);
-        $file = $request->file('file');
-        $image = new Image();
-        $image->product_image = $file;
-        $image->save();
-        $or = $product->images()->save($image);
-        return response()->json([
-            'code' => 200,
-            'data' => $product->images,
-            'or' => $or
-        ]);
-    }
-
-    public function image($id)
-    {
-        $product = Product::findOrFail($id);
-        $images  = $product->images;
-        //return view('admin.product.images', compact('images', 'id'));
-        //return $images;
     }
 }

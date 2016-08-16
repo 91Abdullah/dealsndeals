@@ -59,6 +59,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Image</th>
                             <th>Position</th>
                             <th>Cover</th>
@@ -69,7 +70,17 @@
                             @foreach($images as $image)
                                 <tr>
                                     <td>
-                                        {{ $image->product_image }}
+                                        {{ $image->id }}
+                                    </td>
+                                    <td>
+                                        <img class="img-responsive" src="{{ URL::asset($image->product_image->small->url) }}" alt="">
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <input class="is_cover" {{ $image->is_cover ? "checked" : ""}} data-id="{{ $image->id }}" type="checkbox">
+                                    </td>
+                                    <td>
+                                        <button data-id="{{ $image->id }}" class="btn btn-default deleteImage"><i class="fa fa-trash"></i> Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -164,6 +175,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
     <script src="{{ URL::to('dist/js/images.js') }}"></script>
     <script>
+        var url = "{{ URL::to('/').'/' }}";
         // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
         var previewNode = document.querySelector("#template");
         previewNode.id = "";
@@ -214,20 +226,34 @@
             /*setInterval(function () {
                 $("#file-success").hide();
             }, 3000);*/
-            console.log(response.code == 200);
+            //console.log(response.code == 200);
             if (response.code == 200) {
-                console.log(response);
-                $.each(response.data, function (index, value) {
-                    console.log(value);
-                    $(".tb-data").append(
-                            "<tr><td><img src='" + value.name + "' alt=''></td><td>" + 0 + "</td><td>" + value.is_cover + "</td></tr>"
-                    );
+                console.log(response.data);
+                var checked = response.data.is_cover ? 'checked' : '';
+                $(".tb-data").append(
+                        "<tr>" +
+                        "<td>" + response.data.id + "</td>" +
+                        "<td><img src='" + url + response.data.product_image.small.url + "' alt=''></td>" +
+                        "<td></td>" +
+                        "<td><input data-id='"+ response.data.id +"' class='is_cover' type='checkbox' "+ checked +"></td>" +
+                        "<td><button data-id='"+ response.data.id +"' class='btn btn-default deleteImage'><i class='fa fa-trash'></i> Delete</button></td>" +
+                        "</tr>"
+                );
+
+                $('.is_cover').on('change', function() {
+                    $('.is_cover').not(this).prop('checked', false);
+                    var id = $(this).data("id");
+                    console.log(id);
                 });
             }
         });
 
         myDropzone.on("complete", function(file) {
             myDropzone.removeAllFiles();
+        });
+
+        myDropzone.on("init", function() {
+            console.log('yes');
         });
 
 
@@ -247,5 +273,50 @@
         document.querySelector("#actions .cancel").onclick = function() {
             myDropzone.removeAllFiles(true);
         };*/
+
+        $(".deleteImage").on("click", function (e) {
+            var id = $(e.currentTarget).data("id");
+            console.log(e.currentTarget);
+            $.ajax({
+                type: "GET",
+                url: "{{ route('admin::image.delete') }}",
+                data: {
+                    id: id,
+                    _token: "{{ csrf_token() }}"
+                },
+                dataType: "JSON",
+                success: function (data) {
+                    //console.log('success');
+                    //console.log(data);
+                    $(e.currentTarget).parent().parent().remove();
+                },
+                error: function (data) {
+                    console.log(data.responseText);
+                }
+            })
+        })
+
+        $('.is_cover').on('change', function(event) {
+            $('.is_cover').not(this).prop('checked', false);
+            var id = $(this).data("id");
+            if ($(event.currentTarget).is(':checked')) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('admin::image.cover') }}",
+                    data: {
+                        id: id,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    dataType: "JSON",
+                    success: function (data) {
+                        alert("Update successful");
+                    },
+                    error: function (data) {
+                        alert("Update failed. Try again later!");
+                    }
+                })
+            }
+        });
+
     </script>
 @endsection

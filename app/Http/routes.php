@@ -28,9 +28,29 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], f
     Route::patch('product/update/{id}', ['as' => 'product.update', 'uses' => 'ProductsController@update']);
     Route::get('product/delete/{id}', ['as' => 'product.delete', 'uses' => 'ProductsController@delete']);
 
+    //Customer routes
+    Route::get('customer', ['as' => 'customer.index', 'uses' => 'CustomerController@index']);
+    Route::post('customer', ['as' => 'customer.save', 'uses' => 'CustomerController@save']);
+    Route::get('customer/create', ['as' => 'customer.create', 'uses' => 'CustomerController@create']);
+    Route::get('customer/edit/{id}', ['as' => 'customer.edit', 'uses' => 'CustomerController@edit']);
+    Route::patch('customer/update/{id}', ['as' => 'customer.update', 'uses' => 'CustomerController@update']);
+    Route::get('customer/delete/{id}', ['as' => 'customer.delete', 'uses' => 'CustomerController@delete']);
+    Route::get('customer/view/{id}', ['as' => 'customer.view', 'uses' => 'CustomerController@view']);
+
+    //Address routes
+    Route::get('address', ['as' => 'address.index', 'uses' => 'AddressController@index']);
+    Route::post('address', ['as' => 'address.save', 'uses' => 'AddressController@save']);
+    Route::get('address/create', ['as' => 'address.create', 'uses' => 'AddressController@create']);
+    Route::get('address/edit/{id}', ['as' => 'address.edit', 'uses' => 'AddressController@edit']);
+    Route::patch('address/update/{id}', ['as' => 'address.update', 'uses' => 'AddressController@update']);
+    Route::get('address/delete/{id}', ['as' => 'address.delete', 'uses' => 'AddressController@delete']);
+    Route::get('address/view/{id}', ['as' => 'address.view', 'uses' => 'AddressController@view']);
+
     //image uploading routes
-    Route::post('product/upload', ['as' => 'product.upload', 'uses' => 'ProductsController@upload']);
-    Route::get('product/images/{id}', ['as' => 'product.image', 'uses' => 'ProductsController@image']);
+    Route::post('image/upload', ['as' => 'product.upload', 'uses' => 'ImageController@upload']);
+    Route::get('images/product/{id}', ['as' => 'product.image', 'uses' => 'ImageController@index']);
+    Route::get('images/delete', ['as' => 'image.delete', 'uses' => 'ImageController@delete']);
+    Route::get('images/cover', ['as' => 'image.cover', 'uses' => 'ImageController@setCover']);
 
     //Category routes
     Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
