@@ -22,6 +22,11 @@ class Product extends Model
         ];
     }
 
+    public function order_detail()
+    {
+        return $this->belongsToMany('App\OrderDetail');
+    }
+
     public function images()
     {
         return $this->hasMany('App\Image');

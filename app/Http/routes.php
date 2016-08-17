@@ -37,6 +37,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], f
     Route::get('customer/delete/{id}', ['as' => 'customer.delete', 'uses' => 'CustomerController@delete']);
     Route::get('customer/view/{id}', ['as' => 'customer.view', 'uses' => 'CustomerController@view']);
 
+    //Order routes
+    Route::get('order', ['as' => 'order.index', 'uses' => 'OrderController@index']);
+    Route::post('order', ['as' => 'order.save', 'uses' => 'OrderController@save']);
+    Route::get('order/create', ['as' => 'order.create', 'uses' => 'OrderController@create']);
+    Route::get('order/edit/{id}', ['as' => 'order.edit', 'uses' => 'OrderController@edit']);
+    Route::patch('order/update/{id}', ['as' => 'order.update', 'uses' => 'OrderController@update']);
+    Route::get('order/delete/{id}', ['as' => 'order.delete', 'uses' => 'OrderController@delete']);
+    Route::get('order/view/{id}', ['as' => 'order.view', 'uses' => 'OrderController@view']);
+
     //Address routes
     Route::get('address', ['as' => 'address.index', 'uses' => 'AddressController@index']);
     Route::post('address', ['as' => 'address.save', 'uses' => 'AddressController@save']);

@@ -1,24 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 use App\Address;
+use App\Customer;
 
 class AddressController extends Controller
 {
     public function index()
     {
-        $address = Address::all();
-        return view('address.customer.index', compact('address'));
+        $addresses = Address::all();
+        return view('admin.address.index', compact('addresses'));
     }
 
     public function create()
     {
-        return view('admin.address.create');
+        $customers = Customer::all()->pluck('name', 'id');
+        return view('admin.address.create', compact('customers'));
     }
 
     public function update(Request $request, $id)
@@ -35,14 +39,17 @@ class AddressController extends Controller
 
     public function save(Request $request)
     {
+        $customer = Customer::findOrFail($request->customer);
         $address = Address::create($request->all());
+        $customer->address()->save($address);
         return redirect()->route('admin::address.index');
     }
 
     public function edit($id)
     {
         $address = Address::findOrFail($id);
-        return view('admin.address.edit', compact('address'));
+        $customers = Customer::all()->pluck('name', 'id');
+        return view('admin.address.edit', compact('address', 'customers'));
     }
 
     public function delete($id)

@@ -45,7 +45,7 @@
                     <li class="{{ Request::is('admin/category') || Request::is('admin/category/*') ? 'active' : '' }}"><a href="{{ route('admin::category.index') }}">Categories</a></li>
                 </ul>
             </li>
-            <li class="treeview {{ Request::is('admin/customer') ? 'active' : '' }}">
+            <li class="treeview {{ Request::is('admin/customer') || Request::is('admin/customer/*') || Request::is('admin/address') || Request::is('admin/address/*') ? 'active' : '' }}">
                 <a href="{{ route('admin::customer.index') }}"><i class="fa fa-users"></i>
                     <span>Customer</span>
                     <span class="pull-right-container">
@@ -53,8 +53,12 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::is('admin/customer') || Request::is('admin/customer/*') ? 'active' : '' }}">Customers</li>
-                    <li class="{{ Request::is('admin/addresses') || Request::is('admin/addresses/*') ? 'active' : '' }}">Addresses</li>
+                    <li class="{{ Request::is('admin/customer') || Request::is('admin/customer/*') ? 'active' : '' }}">
+                        <a href="{{ route('admin::customer.index') }}">Customers</a>
+                    </li>
+                    <li class="{{ Request::is('admin/address') || Request::is('admin/address/*') ? 'active' : '' }}">
+                        <a href="{{ route('admin::address.index') }}">Addresses</a>
+                    </li>
                 </ul>
             </li>
         </ul>
