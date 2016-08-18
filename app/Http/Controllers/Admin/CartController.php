@@ -1,32 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
-use App\Order;
+use App\Cart;
 
-class OrderController extends Controller
+class CartController extends Controller
 {
+    //
     //
     public function index()
     {
-        $orders = Order::all();
-        return view('admin.order.index', compact('orders'));
+        $carts = Cart::all();
+        return view('admin.order.index', compact('carts'));
     }
 
     public function create()
     {
-        return view('admin.customer.create');
+        //return view('admin.customer.create');
     }
 
     public function update(Request $request, $id)
     {
-        $order = Order::findOrFail($id);
-        $order->update($request->all());
+        $cart = Cart::findOrFail($id);
+        $cart->update($request->all());
         return redirect()->route('admin::order.index');
     }
 
@@ -37,14 +37,14 @@ class OrderController extends Controller
 
     public function save(Request $request)
     {
-        $customer = Order::create($request->all());
+        $cart = Cart::create($request->all());
         return redirect()->route('admin::order.index');
     }
 
     public function edit($id)
     {
-        $order = Order::findOrFail($id);
-        return view('admin.order.edit', compact('order'));
+        $cart = Cart::findOrFail($id);
+        return view('admin.order.edit', compact('cart'));
     }
 
     public function delete($id)

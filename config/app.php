@@ -159,7 +159,8 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
-        SahusoftCom\EloquentImageMutator\EloquentImageMutatorProvider::class
+        SahusoftCom\EloquentImageMutator\EloquentImageMutatorProvider::class,
+        Aloko\Elasticquent\ElasticquentServiceProvider::class
 
     ],
 

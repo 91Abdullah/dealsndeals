@@ -29,7 +29,12 @@
                     </div>
                     {!! Form::open(['route' => 'admin::order.save', 'class' => 'form-horizontal']) !!}
                     <div class="box-body">
-
+                        <div class="form-group">
+                            {!! Form::label('user_id', 'Customer', ['class' => 'col-sm-2 control-label']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::select('user_id', null, null, ['class' => 'form-control select2']) !!}
+                            </div>
+                        </div>
                     </div>
                     <div class="box-footer">
                         {!! Form::submit('Save', ['class' => 'btn btn-info pull-right']) !!}

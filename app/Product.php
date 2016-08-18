@@ -5,11 +5,21 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Aloko\Elasticquent\ElasticquentTrait;
 
 class Product extends Model
 {
     use Sluggable;
+    use ElasticquentTrait;
+
     //
+    protected $mappingProperties = [
+        'name' => [
+            'type' => 'string',
+            'analyzer' => 'standart'
+        ]
+    ];
+
     protected $fillable = ['name', 'sku', 'meta_title', 'meta_description',
         'wholesale_price', 'price', 'description', 'category_id', 'long_description', 'active', 'quantity'];
 

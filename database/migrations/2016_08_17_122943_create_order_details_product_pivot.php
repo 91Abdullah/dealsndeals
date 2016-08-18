@@ -17,8 +17,9 @@ class CreateOrderDetailsProductPivot extends Migration
             $table->increments('id');
             $table->integer('product_id')->unsigned()->index();
             $table->integer('order_details_id')->unsigned()->index();
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('order_details_id')->references('id')->on('order_details');
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('order_details_id')->references('id')->on('order_details')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,5 +32,6 @@ class CreateOrderDetailsProductPivot extends Migration
     public function down()
     {
         //
+
     }
 }

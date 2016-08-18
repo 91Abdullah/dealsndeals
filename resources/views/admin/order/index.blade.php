@@ -4,12 +4,12 @@
         <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <i class="fa fa-users"></i> Customer
-        <small><a href="{{ route('admin::customer.create') }}" class="btn btn-primary">Create New</a></small>
+        <i class="fa fa-file"></i> Order
+        <small><a href="{{ route('admin::order.create') }}" class="btn btn-primary">Create New</a></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin::index') }}"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li><a href="{{ route('admin::customer.index') }}">Customer</a></li>
+        <li><a href="{{ route('admin::order.index') }}">Order</a></li>
         <li class="active">Create new</li>
     </ol>
 </section>
@@ -17,25 +17,36 @@
 <!-- Main content -->
 <section class="content">
     @include('admin.includes.errors')
-    @if(count($customers) >= 1)
+    @if(count($orders) >= 1)
         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Active</th>
+                <th>Reference</th>
+                <th>City</th>
+                <th>Products</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th>Date</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            @foreach($customers as $customer)
+            @foreach($orders as $order)
                 <tr>
-                    <td>{{ $customer->id }}</td>
-                    <td>{{ $customer->name }}</td>
-                    <td><a href="#"><i style="color: {{ $customer->active ? 'green' : 'red' }}" class="fa {{ $customer->active ? 'fa-check' : 'fa-times' }}"></i></a></td>
+                    <td>{{ $order->id }}</td>
+                    <td>{{ $order->refrence }}</td>
+                    <td>{{ $order->customer->address->city }}</td>
+                    <td>
+                        @foreach($order->cart->order_detaiis->products as $product)
+                            <p>{{ $product->name }}</p>
+                        @endforeach
+                    </td>
+                    <td>{{ $order->customer->name }}</td>
+                    <td></td>
                     <td>
                         <div class="btn-group">
-                            <a type="button" href="{{ route('admin::customer.edit', $customer->id) }}" class="btn btn-default"><span class="fa fa-pencil"></span> Edit</a>
+                            <a type="button" href="{{ route('admin::customer.edit', $order->id) }}" class="btn btn-default"><span class="fa fa-pencil"></span> Edit</a>
                             <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>

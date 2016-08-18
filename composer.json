@@ -11,7 +11,8 @@
         "cviebrock/eloquent-sluggable": "4.0",
         "baum/baum": "~1.1",
         "barryvdh/laravel-ide-helper": "^2.2",
-        "sahusoftcom/eloquent-image-mutator": "dev-master"
+        "sahusoftcom/eloquent-image-mutator": "dev-master",
+        "aloko/elasticquent5": "^0.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

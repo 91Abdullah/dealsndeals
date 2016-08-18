@@ -19,5 +19,18 @@ class CategoryTableSeeder extends Seeder
         $home->active = false;
         $home->save();
         $home->makeRoot();
+
+        $decor = new App\Category();
+        $decor->name = "Home Decor";
+        $decor->active = true;
+        $decor->save();
+        $decor->makeChildOf($home);
+
+        $product = new App\Product();
+        $product->name = "Tree of Life";
+        $product->active = true;
+        $product->default_category()->associate($decor);
+        $product->save();
+        $decor->products()->attach($product->id);
     }
 }

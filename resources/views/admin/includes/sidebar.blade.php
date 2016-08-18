@@ -61,6 +61,19 @@
                     </li>
                 </ul>
             </li>
+            <li class="treeview {{ Request::is('admin/order') || Request::is('admin/order/*') ? 'active' : '' }}">
+                <a href="{{ route('admin::order.index') }}"><i class="fa fa-file"></i>
+                    <span>Order</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ Request::is('admin/order') || Request::is('admin/order/*') ? 'active' : '' }}">
+                        <a href="{{ route('admin::order.index') }}">Order</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
