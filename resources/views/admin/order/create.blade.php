@@ -30,9 +30,37 @@
                     {!! Form::open(['route' => 'admin::order.save', 'class' => 'form-horizontal']) !!}
                     <div class="box-body">
                         <div class="form-group">
-                            {!! Form::label('user_id', 'Customer', ['class' => 'col-sm-2 control-label']) !!}
+                            {!! Form::label('customer_id', 'Customer', ['class' => 'col-sm-2 control-label']) !!}
                             <div class="col-sm-10">
-                                {!! Form::select('user_id', null, null, ['class' => 'form-control select2']) !!}
+                                {!! Form::select('customer_id', array(), null, ['class' => 'form-control select2']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('reference', 'Order Reference', ['class' => 'col-sm-2 control-label']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::text('reference', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-header with-border">
+                        Add Products
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            {!! Form::label('product_id', 'Product', ['class' => 'col-sm-2 control-label']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::select('product_id', array(), null, ['class' => 'form-control select2', 'multiple' => 'multiple']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-header with-border">
+                        Add Voucher (Optional)
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            {!! Form::label('voucher_id', 'Voucher', ['class' => 'col-sm-2 control-label']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::select('voucher_id', array(), null, ['class' => 'form-control select2']) !!}
                             </div>
                         </div>
                     </div>
@@ -51,4 +79,14 @@
     <script src='{{ URL::to('dist/js/bootstrap-maxlength.js') }}'></script>
     <script src="{{ URL::to('plugins/select2/select2.min.js') }}"></script>
     <script src="{{ URL::to('plugins/iCheck/icheck.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#customer_id").select2({
+                ajax: {
+                    url: "{{ route('admin::customer:index') }}",
+                    
+                }
+            })
+        })
+    </script>
 @endsection

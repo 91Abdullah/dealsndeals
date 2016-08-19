@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     //
-    public function order_detail()
+    public function items()
     {
-        return $this->hasOne('App\OrderDetail');
+        return $this->hasMany('App\CartItem');
     }
 }

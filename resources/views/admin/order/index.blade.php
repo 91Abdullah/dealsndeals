@@ -38,24 +38,26 @@
                     <td>{{ $order->refrence }}</td>
                     <td>{{ $order->customer->address->city }}</td>
                     <td>
-                        @foreach($order->cart->order_detaiis->products as $product)
-                            <p>{{ $product->name }}</p>
+                        @foreach($order->cart->items as $item)
+                            <p>{{ $item->product->name }}</p>
                         @endforeach
                     </td>
                     <td>{{ $order->customer->name }}</td>
-                    <td></td>
+                    <td>
+                        {{ $order->cart->total }}
+                    </td>
                     <td>
                         <div class="btn-group">
-                            <a type="button" href="{{ route('admin::customer.edit', $order->id) }}" class="btn btn-default"><span class="fa fa-pencil"></span> Edit</a>
+                            <a type="button" href="{{ route('admin::order.edit', $order->id) }}" class="btn btn-default"><span class="fa fa-pencil"></span> Edit</a>
                             <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ route('admin::customer.view', $customer->id) }}"><i class="fa fa-search"></i> View</a></li>
+                                <li><a href="{{ route('admin::order.view', $order->id) }}"><i class="fa fa-search"></i> View</a></li>
                                 <li><a href="#"><i class="fa fa-copy"></i>Duplicate</a></li>
                                 <li class="divider"></li>
-                                <li><a href="{{ route('admin::customer.delete', $customer->id) }}"><i class="fa fa-trash"></i> Delete</a></li>
+                                <li><a href="{{ route('admin::order.delete', $order->id) }}"><i class="fa fa-trash"></i> Delete</a></li>
                             </ul>
                         </div>
                     </td>
@@ -64,7 +66,7 @@
             </tbody>
         </table>
     @else
-        <div class="alert alert-info">No categories found.</div>
+        <div class="alert alert-info">No orders found.</div>
     @endif
 </section>
 @endsection

@@ -32,9 +32,9 @@ class Product extends Model
         ];
     }
 
-    public function order_detail()
+    public function carts()
     {
-        return $this->belongsToMany('App\OrderDetail');
+        return $this->belongsToMany('App\Cart');
     }
 
     public function images()

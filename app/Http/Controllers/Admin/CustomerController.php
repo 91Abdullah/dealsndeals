@@ -12,10 +12,18 @@ use App\Customer;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $customers = Customer::all();
-        return view('admin.customer.index', compact('customers'));
+
+        if ($request->ajax()) {
+            if (!empty($customers))
+                return response()->json($customers, 200);
+            else
+                return response()->json('Error occurred. Please try again.', 400);
+        }
+        else
+            return view('admin.customer.index', compact('customers'));
     }
 
     public function create()

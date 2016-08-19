@@ -20,7 +20,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        return view('admin.customer.create');
+        return view('admin.order.create');
     }
 
     public function update(Request $request, $id)
@@ -37,7 +37,7 @@ class OrderController extends Controller
 
     public function save(Request $request)
     {
-        $customer = Order::create($request->all());
+        $order = Order::create($request->all());
         return redirect()->route('admin::order.index');
     }
 
