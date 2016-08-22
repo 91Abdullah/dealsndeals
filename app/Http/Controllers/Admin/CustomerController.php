@@ -15,15 +15,7 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $customers = Customer::all();
-
-        if ($request->ajax()) {
-            if (!empty($customers))
-                return response()->json($customers, 200);
-            else
-                return response()->json('Error occurred. Please try again.', 400);
-        }
-        else
-            return view('admin.customer.index', compact('customers'));
+        return view('admin.customer.index', compact('customers'));
     }
 
     public function create()

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Cart;
+use App\Customer;
+use App\Product;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Order;
+use App\Voucher;
 
 class OrderController extends Controller
 {
@@ -15,12 +19,15 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return view('admin.order.index', compact('orders'));
+        return $orders;
     }
 
     public function create()
     {
-        return view('admin.order.create');
+        $customers = Customer::all()->pluck('name', 'id');
+        $products = Product::all()->pluck('name', 'id');
+        $vouchers = Voucher::all()->pluck('number', 'id');
+        return view('admin.order.create', compact('customers', 'products', 'vouchers'));
     }
 
     public function update(Request $request, $id)
@@ -37,6 +44,7 @@ class OrderController extends Controller
 
     public function save(Request $request)
     {
+        $cart = new Cart();
         $order = Order::create($request->all());
         return redirect()->route('admin::order.index');
     }

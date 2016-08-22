@@ -32,7 +32,7 @@
                         <div class="form-group">
                             {!! Form::label('customer_id', 'Customer', ['class' => 'col-sm-2 control-label']) !!}
                             <div class="col-sm-10">
-                                {!! Form::select('customer_id', array(), null, ['class' => 'form-control select2']) !!}
+                                {!! Form::select('customer_id', $customers, null, ['class' => 'form-control select2']) !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,7 +49,31 @@
                         <div class="form-group">
                             {!! Form::label('product_id', 'Product', ['class' => 'col-sm-2 control-label']) !!}
                             <div class="col-sm-10">
-                                {!! Form::select('product_id', array(), null, ['class' => 'form-control select2', 'multiple' => 'multiple']) !!}
+                                {!! Form::select('product_id', $products, null, ['class' => 'form-control select2']) !!}
+                                {!! Form::input('number', 'Quantity', 1) !!}
+                                {!! Form::button('Add', ['class' => 'btn btn-default']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('cart', 'Cart', ['class' => 'col-sm-2 control-label']) !!}
+                            <div class="col-sm-10">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Thumbnail</td>
+                                        <td>Name</td>
+                                        <td>Quantity</td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{!! Html::image('http://placehold.it/120x120', null, ['class' => 'img-responsive']) !!}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -60,7 +84,7 @@
                         <div class="form-group">
                             {!! Form::label('voucher_id', 'Voucher', ['class' => 'col-sm-2 control-label']) !!}
                             <div class="col-sm-10">
-                                {!! Form::select('voucher_id', array(), null, ['class' => 'form-control select2']) !!}
+                                {!! Form::select('voucher_id', $vouchers, null, ['class' => 'form-control select2']) !!}
                             </div>
                         </div>
                     </div>
@@ -81,12 +105,16 @@
     <script src="{{ URL::to('plugins/iCheck/icheck.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $("#customer_id").select2({
-                ajax: {
-                    url: "{{ route('admin::customer:index') }}",
-                    
-                }
-            })
+            $('#customer_id').select2({
+                theme: "classic"
+            });
+            $('#product_id').select2({
+                theme: "classic",
+                width: "50%"
+            });
+            $('#voucher_id').select2({
+                theme: "classic"
+            });
         })
     </script>
 @endsection
